@@ -1,5 +1,6 @@
 package com.skni.warsztatysghv2;
 
+import com.skni.warsztatysghv2.registration.Student;
 import com.skni.warsztatysghv2.registration.StudentService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,13 +10,17 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 public class WarsztatySgHv2Application {
 
+    private StudentService studentService;
+
+    public void setStudentService(StudentService studentService) {this.studentService = studentService;}
+
     public static void main(String[] args) {
         SpringApplication.run(WarsztatySgHv2Application.class, args);
     }
 
     @EventListener(ApplicationReadyEvent.class)
     public void doAfterStartup() {
-        new StudentService().printStudent();
+        studentService.printStudent();
     }
 
 }
